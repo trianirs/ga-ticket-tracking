@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA Ticket Tracking</title>
+<style>
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-info: #185FA5;
+  --color-text-primary: #212121;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  --color-text-info: #ffffff;
+  --color-border-secondary: #d9d9d9;
+  --color-border-tertiary: #e8e8e8;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #fafafa;
+  padding: 16px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 20px;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.header p {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.ticket-id {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.ticket-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-top: 2px;
+}
+
+.kategori-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--color-background-secondary);
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.ticket-meta {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-dot {
+  position: absolute;
+  left: -28px;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.tl-line {
+  position: absolute;
+  left: -20px;
+  top: 20px;
+  width: 2px;
+  height: calc(100% - 2px);
+  background: var(--color-border-tertiary);
+}
+
+.tl-item:last-child .tl-line {
+  display: none;
+}
+
+.tl-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.tl-sub {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-top: 3px;
+}
+
+.tl-time {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.tl-done .tl-dot {
+  background: #1D9E75;
+  color: #fff;
+}
+
+.tl-done .tl-label {
+  color: var(--color-text-primary);
+}
+
+.tl-active .tl-dot {
+  background: #185FA5;
+  color: #fff;
+  box-shadow: 0 0 0 4px #B5D4F4;
+}
+
+.tl-active .tl-label {
+  color: #185FA5;
+  font-weight: 500;
+}
+
+.tl-wait .tl-dot {
+  background: var(--color-background-secondary);
+  border: 1.5px solid var(--color-border-secondary);
+  color: var(--color-text-tertiary);
+}
+
+.tl-wait .tl-label {
+  color: var(--color-text-tertiary);
+}
+
+.tl-wait .tl-line {
+  opacity: 0.4;
+}
+
+.divider {
+  height: 0.5px;
+  background: var(--color-border-tertiary);
+  margin: 12px 0;
+}
+
+.note-box {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 10px 12px;
+  margin-top: 12px;
+}
+
+.note-label {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-bottom: 3px;
+}
+
+.note-text {
+  font-size: 13px;
+  color: var(--color-text-primary);
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-row input {
+  flex: 1;
+  font-size: 13px;
+  padding: 10px 12px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+}
+
+.search-row button {
+  font-size: 13px;
+  padding: 10px 16px;
+  background: var(--color-background-info);
+  color: var(--color-text-info);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.search-row button:hover {
+  background: #0f4d89;
+}
+
+.empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.loading {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.error {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: var(--border-radius-md);
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #856404;
+}
+
+.refresh-btn {
+  display: block;
+  margin: 0 auto 16px;
+  font-size: 13px;
+  padding: 8px 16px;
+  background: #f5f5f5;
+  color: var(--color-text-primary);
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.refresh-btn:hover {
+  background: #e8e8e8;
+}
+
+.last-update {
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🎫 GA Ticket Tracking</h1>
+    <p>Real-time tracking dari Google Sheets</p>
+  </div>
+
+  <div id="errorMsg"></div>
+  
+  <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
+  
+  <div class="last-update" id="lastUpdate"></div>
+
+  <div class="search-row">
+    <input id="searchInput" type="text" placeholder="Cari No. Tiket, klinik, atau kategori..." />
+    <button onclick="doSearch()">Cari</button>
+  </div>
+
+  <div id="result">
+    <div class="loading">⏳ Loading data dari Google Sheets...</div>
+  </div>
+</div>
+
+<script>
+// ============================================
+// KONFIGURASI - GANTI DENGAN URL GOOGLE SHEETS KAMU
+// ============================================
+
+// URL Google Sheets yang sudah di-publish
+// Format: https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/gviz/tq?tqx=out:csv&sheet=SHEET_NAME
+
+const SHEETS_CONFIG = {
+  // Sheet TICKETS
+  tickets: 'https://docs.google.com/spreadsheets/d/1Na7BYDCQs3peAT3J3KxoCz6f7p7Gh-0m0naaEwnMQcs/export?format=csv&gid=0',
+  
+  // Sheet TIMELINE
+  timeline: 'https://docs.google.com/spreadsheets/d/1Na7BYDCQs3peAT3J3KxoCz6f7p7Gh-0m0naaEwnMQcs/export?format=csv&gid=1293161438'
+};
+
+// ============================================
+// KONFIGURASI STATUS COLORS
+// ============================================
+
+const STATUS_STYLE = {
+  'On Progress': { bg: '#B5D4F4', color: '#0C447C' },
+  'Barang Dalam Pengiriman': { bg: '#9FE1CB', color: '#085041' },
+  'Closed / Done': { bg: '#C0DD97', color: '#27500A' },
+  'Open': { bg: '#FAC775', color: '#633806' },
+  'Diverifikasi GA': { bg: '#CECBF6', color: '#26215C' },
+  'Hold': { bg: '#D3D1C7', color: '#2C2C2A' },
+  'Cancelled': { bg: '#F7C1C1', color: '#501313' },
+};
+
+// ============================================
+// DATA STORAGE
+// ============================================
+
+let allTickets = [];
+let allTimelines = [];
+
+// ============================================
+// PARSE CSV FROM GOOGLE SHEETS
+// ============================================
+
+function parseCSV(csvText) {
+  const lines = csvText.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+  
+  const data = [];
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+    const row = {};
+    headers.forEach((header, index) => {
+      row[header] = values[index] || '';
+    });
+    data.push(row);
+  }
+  return data;
+}
+
+// ============================================
+// LOAD DATA FROM GOOGLE SHEETS
+// ============================================
+
+async function loadData() {
+  const errorDiv = document.getElementById('errorMsg');
+  errorDiv.innerHTML = '';
+  
+  // Cek apakah URL sudah di-set
+  if (SHEETS_CONFIG.tickets.includes('GANTI_DENGAN')) {
+    errorDiv.innerHTML = `
+      <div class="error">
+        <strong>⚠️ Belum dikonfigurasi!</strong><br>
+        Silakan ganti URL Google Sheets di bagian KONFIGURASI (baris 218-223)
+      </div>
+    `;
+    return;
+  }
+  
+  document.getElementById('result').innerHTML = '<div class="loading">⏳ Loading data...</div>';
+  
+  try {
+    // Load TICKETS sheet
+    const ticketsResponse = await fetch(SHEETS_CONFIG.tickets);
+    const ticketsCSV = await ticketsResponse.text();
+    allTickets = parseCSV(ticketsCSV);
+    
+    // Load TIMELINE sheet
+    const timelineResponse = await fetch(SHEETS_CONFIG.timeline);
+    const timelineCSV = await timelineResponse.text();
+    allTimelines = parseCSV(timelineCSV);
+    
+    // Update last update time
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent = 
+      `Terakhir diupdate: ${now.toLocaleString('id-ID')}`;
+    
+    // Render all tickets
+    renderAllTickets();
+    
+  } catch (error) {
+    errorDiv.innerHTML = `
+      <div class="error">
+        <strong>❌ Error loading data:</strong><br>
+        ${error.message}<br><br>
+        Pastikan Google Sheets sudah di-publish dan URL sudah benar.
+      </div>
+    `;
+    document.getElementById('result').innerHTML = '';
+  }
+}
+
+// ============================================
+// RENDER FUNCTIONS
+// ============================================
+
+function renderTicket(ticket) {
+  const st = STATUS_STYLE[ticket.status] || { bg: '#D3D1C7', color: '#444' };
+  
+  // Get timeline for this ticket
+  const steps = allTimelines
+    .filter(t => t.ticket_id === ticket.ticket_id)
+    .sort((a, b) => parseInt(a.step_order) - parseInt(b.step_order))
+    .map((s, i) => {
+      const isDone = s.is_done === 'TRUE';
+      const isActive = s.is_active === 'TRUE';
+      const cls = isDone && !isActive ? 'tl-done' : isActive ? 'tl-active' : 'tl-wait';
+      const icon = isDone && !isActive ? '&#10003;' : isActive ? (i + 1) : ' ';
+      
+      return `
+        <div class="tl-item ${cls}">
+          <div class="tl-dot">${icon}</div>
+          <div class="tl-line"></div>
+          <div class="tl-label">${s.label}</div>
+          ${s.sub_label ? `<div class="tl-sub">${s.sub_label}</div>` : ''}
+          ${s.waktu ? `<div class="tl-time">${s.waktu}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  
+  return `
+    <div class="card">
+      <div class="ticket-header">
+        <div>
+          <div class="ticket-id">${ticket.ticket_id} &nbsp;·&nbsp; ${ticket.tanggal}</div>
+          <div class="ticket-title">${ticket.sub_kategori}</div>
+          <div class="kategori-badge">${ticket.kategori}</div>
+          <div class="ticket-meta">${ticket.klinik} &nbsp;·&nbsp; PIC: ${ticket.pic}</div>
+        </div>
+        <div class="status-badge" style="background:${st.bg};color:${st.color}">${ticket.status}</div>
+      </div>
+      <div class="divider"></div>
+      <div class="timeline">${steps}</div>
+      ${ticket.catatan ? `
+        <div class="note-box">
+          <div class="note-label">Catatan dari GA</div>
+          <div class="note-text">${ticket.catatan}</div>
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function renderAllTickets() {
+  const resultDiv = document.getElementById('result');
+  
+  if (allTickets.length === 0) {
+    resultDiv.innerHTML = '<div class="empty">Belum ada data tiket.</div>';
+    return;
+  }
+  
+  resultDiv.innerHTML = allTickets.map(renderTicket).join('');
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const resultDiv = document.getElementById('result');
+  
+  if (!q) {
+    renderAllTickets();
+    return;
+  }
+  
+  const found = allTickets.filter(t =>
+    t.ticket_id.toLowerCase().includes(q) ||
+    t.klinik.toLowerCase().includes(q) ||
+    t.pengaju.toLowerCase().includes(q) ||
+    t.kategori.toLowerCase().includes(q) ||
+    t.sub_kategori.toLowerCase().includes(q)
+  );
+  
+  if (found.length === 0) {
+    resultDiv.innerHTML = `
+      <div class="empty">
+        Tiket tidak ditemukan.<br>
+        Coba cari dengan No. Tiket (contoh: GA-0023), nama klinik, atau kategori.
+      </div>
+    `;
+  } else {
+    resultDiv.innerHTML = found.map(renderTicket).join('');
+  }
+}
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+// Auto-load on page load
+window.addEventListener('load', loadData);
+
+// Auto-refresh every 30 seconds (optional)
+// setInterval(loadData, 30000);
+</script>
+
+</body>
+</html>
