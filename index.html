@@ -5,31 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tracking Tiket Helpdesk MHDC Group</title>
 <style>
-:root {
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --color-background-primary: #ffffff;
-  --color-background-secondary: #f5f5f5;
-  --color-background-info: #185FA5;
-  --color-text-primary: #212121;
-  --color-text-secondary: #666666;
-  --color-text-tertiary: #999999;
-  --color-text-info: #ffffff;
-  --color-border-secondary: #d9d9d9;
-  --color-border-tertiary: #e8e8e8;
-  --border-radius-md: 6px;
-  --border-radius-lg: 8px;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: var(--font-sans);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #fafafa;
   padding: 16px;
+  min-height: 100vh;
 }
 
 .container {
@@ -37,10 +19,127 @@ body {
   margin: 0 auto;
 }
 
+/* ===================== LOGIN SCREEN ===================== */
+.login-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 0.5px solid #e8e8e8;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.login-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.login-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #212121;
+  margin-bottom: 4px;
+}
+
+.login-subtitle {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.login-divider {
+  height: 0.5px;
+  background: #e8e8e8;
+  margin: 20px 0;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+  text-align: left;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-select, .form-input {
+  width: 100%;
+  font-size: 14px;
+  padding: 11px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #212121;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-select:focus, .form-input:focus {
+  border-color: #AE9862;
+}
+
+.pin-wrapper {
+  position: relative;
+}
+
+.pin-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #888;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #AE9862;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+
+.login-btn:hover { background: #8e7a4e; }
+
+.login-error {
+  font-size: 12px;
+  color: #c0392b;
+  background: #fdecea;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  display: none;
+}
+
+/* ===================== MAIN APP ===================== */
+.main-app { display: none; }
+
 .header-card {
-  background: var(--color-background-primary);
-  border-radius: var(--border-radius-lg);
-  border: 0.5px solid var(--color-border-tertiary);
+  background: #ffffff;
+  border-radius: 8px;
+  border: 0.5px solid #e8e8e8;
   padding: 20px;
   margin-bottom: 16px;
 }
@@ -55,44 +154,68 @@ body {
 .header-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-.icon-box {
+.header-logo {
   height: 44px;
   width: auto;
   object-fit: contain;
-  background: none;
-  border-radius: 0;
 }
 
 .title-text h1 {
   font-size: 18px;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: #212121;
   margin: 0;
 }
 
 .title-text p {
   font-size: 11px;
-  color: var(--color-text-secondary);
+  color: #666;
   margin: 0;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.klinik-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: #f5edd8;
+  color: #AE9862;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.logout-btn {
+  padding: 6px 12px;
+  background: transparent;
+  color: #888;
+  border: 0.5px solid #d9d9d9;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.logout-btn:hover { background: #f5f5f5; }
 
 .refresh-btn {
   padding: 8px 14px;
   background: #AE9862;
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
 }
 
-.refresh-btn:hover {
-  background: #8e7a4e;
-}
+.refresh-btn:hover { background: #8e7a4e; }
 
 .stats-row {
   display: grid;
@@ -102,48 +225,16 @@ body {
 }
 
 .stat-card {
-  background: var(--color-background-secondary);
-  border-radius: var(--border-radius-md);
+  background: #f5f5f5;
+  border-radius: 6px;
   padding: 10px;
   text-align: center;
 }
 
-.stat-number {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-}
-
-.stat-number.blue {
-  color: #AE9862;
-}
-
-.stat-number.green {
-  color: #1D9E75;
-}
-
-.stat-label {
-  font-size: 10px;
-  color: var(--color-text-secondary);
-  margin-top: 2px;
-}
-
-.filter-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.filter-row select {
-  flex: 1;
-  font-size: 13px;
-  padding: 10px 12px;
-  border: 0.5px solid var(--color-border-secondary);
-  border-radius: var(--border-radius-md);
-  background: var(--color-background-primary);
-  color: var(--color-text-primary);
-  cursor: pointer;
-}
+.stat-number { font-size: 20px; font-weight: 500; color: #212121; }
+.stat-number.gold { color: #AE9862; }
+.stat-number.green { color: #1D9E75; }
+.stat-label { font-size: 10px; color: #666; margin-top: 2px; }
 
 .search-row {
   display: flex;
@@ -154,11 +245,14 @@ body {
   flex: 1;
   font-size: 13px;
   padding: 10px 12px;
-  border: 0.5px solid var(--color-border-secondary);
-  border-radius: var(--border-radius-md);
-  background: var(--color-background-primary);
-  color: var(--color-text-primary);
+  border: 0.5px solid #d9d9d9;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #212121;
+  outline: none;
 }
+
+.search-row input:focus { border-color: #AE9862; }
 
 .search-row button {
   font-size: 13px;
@@ -166,19 +260,18 @@ body {
   background: #AE9862;
   color: white;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
 }
 
-.search-row button:hover {
-  background: #8e7a4e;
-}
+.search-row button:hover { background: #8e7a4e; }
 
+/* ===================== TICKET CARDS ===================== */
 .card {
-  background: var(--color-background-primary);
-  border: 0.5px solid var(--color-border-tertiary);
-  border-radius: var(--border-radius-lg);
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  border-radius: 8px;
   padding: 16px;
   margin-bottom: 12px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.04);
@@ -192,15 +285,12 @@ body {
   gap: 12px;
 }
 
-.ticket-id {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-}
+.ticket-id { font-size: 11px; color: #666; }
 
 .ticket-title {
   font-size: 15px;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: #212121;
   margin-top: 2px;
 }
 
@@ -210,18 +300,14 @@ body {
   font-weight: 600;
   padding: 3px 8px;
   border-radius: 4px;
-  background: var(--color-background-secondary);
-  color: var(--color-text-secondary);
+  background: #f5f5f5;
+  color: #666;
   margin-top: 4px;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
 
-.ticket-meta {
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  margin-top: 4px;
-}
+.ticket-meta { font-size: 12px; color: #666; margin-top: 4px; }
 
 .status-badge {
   font-size: 11px;
@@ -231,19 +317,12 @@ body {
   white-space: nowrap;
 }
 
-.timeline {
-  position: relative;
-  padding-left: 28px;
-}
+.divider { height: 0.5px; background: #e8e8e8; margin: 12px 0; }
 
-.tl-item {
-  position: relative;
-  padding-bottom: 20px;
-}
+.timeline { position: relative; padding-left: 28px; }
 
-.tl-item:last-child {
-  padding-bottom: 0;
-}
+.tl-item { position: relative; padding-bottom: 20px; }
+.tl-item:last-child { padding-bottom: 0; }
 
 .tl-dot {
   position: absolute;
@@ -266,136 +345,87 @@ body {
   top: 20px;
   width: 2px;
   height: calc(100% - 2px);
-  background: var(--color-border-tertiary);
+  background: #e8e8e8;
 }
 
-.tl-item:last-child .tl-line {
-  display: none;
-}
+.tl-item:last-child .tl-line { display: none; }
 
-.tl-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  line-height: 1.3;
-}
+.tl-label { font-size: 13px; font-weight: 500; color: #212121; line-height: 1.3; }
+.tl-sub { font-size: 11px; color: #666; margin-top: 3px; }
+.tl-time { font-size: 11px; color: #666; margin-top: 2px; }
 
-.tl-sub {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  margin-top: 3px;
-}
+.tl-done .tl-dot { background: #AE9862; color: #fff; }
+.tl-done .tl-label { color: #212121; }
 
-.tl-time {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  margin-top: 2px;
-}
+.tl-active .tl-dot { background: #AE9862; color: #fff; box-shadow: 0 0 0 4px #e8dfc8; }
+.tl-active .tl-label { color: #AE9862; font-weight: 500; }
 
-.tl-done .tl-dot {
-  background: #AE9862;
-  color: #fff;
-}
-
-.tl-done .tl-label {
-  color: var(--color-text-primary);
-}
-
-.tl-active .tl-dot {
-  background: #AE9862;
-  color: #fff;
-  box-shadow: 0 0 0 4px #e8dfc8;
-}
-
-.tl-active .tl-label {
-  color: #AE9862;
-  font-weight: 500;
-}
-
-.tl-wait .tl-dot {
-  background: var(--color-background-secondary);
-  border: 1.5px solid var(--color-border-secondary);
-  color: var(--color-text-tertiary);
-}
-
-.tl-wait .tl-label {
-  color: var(--color-text-tertiary);
-}
-
-.tl-wait .tl-line {
-  opacity: 0.4;
-}
-
-.divider {
-  height: 0.5px;
-  background: var(--color-border-tertiary);
-  margin: 12px 0;
-}
+.tl-wait .tl-dot { background: #f5f5f5; border: 1.5px solid #d9d9d9; color: #999; }
+.tl-wait .tl-label { color: #999; }
+.tl-wait .tl-line { opacity: 0.4; }
 
 .note-box {
-  background: var(--color-background-secondary);
-  border-radius: var(--border-radius-md);
+  background: #f5f5f5;
+  border-radius: 6px;
   padding: 10px 12px;
   margin-top: 12px;
 }
 
-.note-label {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  margin-bottom: 3px;
-}
+.note-label { font-size: 11px; color: #666; margin-bottom: 3px; }
+.note-text { font-size: 13px; color: #212121; }
 
-.note-text {
-  font-size: 13px;
-  color: var(--color-text-primary);
-}
-
-.empty {
-  text-align: center;
-  padding: 32px 16px;
-  color: var(--color-text-secondary);
-  font-size: 13px;
-}
-
-.loading {
-  text-align: center;
-  padding: 32px 16px;
-  color: var(--color-text-secondary);
-  font-size: 13px;
-}
-
-.error {
-  background: #fff3cd;
-  border: 1px solid #ffc107;
-  border-radius: var(--border-radius-md);
-  padding: 12px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: #856404;
-}
-
-.result-count {
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  margin-bottom: 12px;
-  text-align: center;
-}
+.empty { text-align: center; padding: 32px 16px; color: #666; font-size: 13px; }
+.loading { text-align: center; padding: 32px 16px; color: #666; font-size: 13px; }
+.error { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 12px; margin-bottom: 16px; font-size: 13px; color: #856404; }
+.result-count { font-size: 12px; color: #666; margin-bottom: 12px; text-align: center; }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- Header Card -->
+<!-- ===================== LOGIN SCREEN ===================== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <img src="logo.png" alt="MHDC" class="login-logo">
+    <div class="login-title">Tracking Tiket Helpdesk</div>
+    <div class="login-subtitle">MHDC Group</div>
+    <div class="login-divider"></div>
+
+    <label class="form-label">Pilih Klinik</label>
+    <select class="form-select" id="klinikSelect">
+      <option value="">-- Pilih Klinik --</option>
+      <!-- Klinik akan otomatis terisi dari KLINIK_CONFIG -->
+    </select>
+
+    <label class="form-label">Masukkan PIN</label>
+    <div class="pin-wrapper">
+      <input class="form-input" type="password" id="pinInput" placeholder="Masukkan PIN klinik kamu" style="padding-right: 40px;" />
+      <button class="pin-toggle" onclick="togglePin()" id="pinToggle">👁️</button>
+    </div>
+
+    <button class="login-btn" onclick="doLogin()">Masuk</button>
+    <div class="login-error" id="loginError">PIN salah atau klinik tidak sesuai. Coba lagi.</div>
+  </div>
+</div>
+
+<!-- ===================== MAIN APP ===================== -->
+<div class="container main-app" id="mainApp">
   <div class="header-card">
     <div class="header-top">
       <div class="header-title">
-        <img src="logo.png" alt="MHDC" class="icon-box">
+        <img src="logo.png" alt="MHDC" class="header-logo">
         <div class="title-text">
           <h1>Tracking Tiket Helpdesk MHDC Group</h1>
           <p>Pilih klinik dan masukan nomor tiket</p>
         </div>
       </div>
-      <button class="refresh-btn" onclick="loadData()">Refresh</button>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+      <div class="klinik-badge" id="activeBadge">-</div>
+      <div class="header-right">
+        <button class="logout-btn" onclick="doLogout()">Ganti Klinik</button>
+        <button class="refresh-btn" onclick="loadData()">Refresh</button>
+      </div>
     </div>
 
     <!-- Stats Cards -->
@@ -405,7 +435,7 @@ body {
         <div class="stat-label">Total Tiket</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number blue" id="progressStat">-</div>
+        <div class="stat-number gold" id="progressStat">-</div>
         <div class="stat-label">On Progress</div>
       </div>
       <div class="stat-card">
@@ -414,16 +444,9 @@ body {
       </div>
     </div>
 
-    <!-- Filter Klinik -->
-    <div class="filter-row">
-      <select id="klinikFilter" onchange="applyFilters()">
-        <option value="">Semua Klinik</option>
-      </select>
-    </div>
-
     <!-- Search -->
     <div class="search-row">
-      <input id="searchInput" type="text" placeholder="Cari No. Tiket, klinik, atau kategori..." />
+      <input id="searchInput" type="text" placeholder="Cari No. Tiket atau kategori..." />
       <button onclick="applyFilters()">Cari</button>
     </div>
   </div>
@@ -431,126 +454,228 @@ body {
   <div id="errorMsg"></div>
   <div class="result-count" id="resultCount"></div>
   <div id="result">
-    <div class="loading">⏳ Loading data dari Google Sheets...</div>
+    <div class="loading">⏳ Loading data...</div>
   </div>
 </div>
 
 <script>
+// ================================================================
+// ⚙️ KONFIGURASI — EDIT BAGIAN INI UNTUK TAMBAH/UBAH KLINIK & PIN
+// ================================================================
+const KLINIK_CONFIG = [
+  // FORMAT: { nama: 'Nama Klinik Sesuai Google Sheets', pin: 'PIN' }
+  // Contoh:
+  { nama: 'Klinik Medikids Sunter',      pin: '1234' },
+  { nama: 'Klinik Medikids Kemang',      pin: '5678' },
+  { nama: 'Klinik Medikids Lebak Bulus', pin: '9012' },
+  // Tambahkan klinik baru di bawah sini dengan format yang sama:
+  // { nama: 'Nama Klinik Baru', pin: 'PINnya' },
+];
+
+// PIN untuk GA/Admin (bisa lihat SEMUA klinik)
+const ADMIN_CONFIG = {
+  nama: 'GA / Admin',
+  pin: 'admin123', // ← GANTI PIN ADMIN DI SINI
+};
+// ================================================================
+// SELESAI KONFIGURASI — jangan ubah kode di bawah ini
+// ================================================================
+
 const SHEETS_CONFIG = {
-  tickets: 'https://docs.google.com/spreadsheets/d/1Na7BYDCQs3peAT3J3KxoCz6f7p7Gh-0m0naaEwnMQcs/export?format=csv&gid=0',
+  tickets:  'https://docs.google.com/spreadsheets/d/1Na7BYDCQs3peAT3J3KxoCz6f7p7Gh-0m0naaEwnMQcs/export?format=csv&gid=0',
   timeline: 'https://docs.google.com/spreadsheets/d/1Na7BYDCQs3peAT3J3KxoCz6f7p7Gh-0m0naaEwnMQcs/export?format=csv&gid=1293161438'
 };
 
 const STATUS_STYLE = {
-  'On Progress': { bg: '#B5D4F4', color: '#0C447C' },
-  'Closed / Done': { bg: '#d4f0e6', color: '#1D9E75' },
-  'Open': { bg: '#FAC775', color: '#633806' },
-  'Diverifikasi GA': { bg: '#CECBF6', color: '#26215C' },
-  'Hold': { bg: '#D3D1C7', color: '#2C2C2A' },
-  'Cancelled': { bg: '#F7C1C1', color: '#501313' },
+  'On Progress':    { bg: '#B5D4F4', color: '#0C447C' },
+  'Closed / Done':  { bg: '#d4f0e6', color: '#1D9E75' },
+  'Open':           { bg: '#FAC775', color: '#633806' },
+  'Diverifikasi GA':{ bg: '#CECBF6', color: '#26215C' },
+  'Hold':           { bg: '#D3D1C7', color: '#2C2C2A' },
+  'Cancelled':      { bg: '#F7C1C1', color: '#501313' },
 };
 
 let allTickets = [];
 let allTimelines = [];
+let activeKlinik = null;
+let isAdmin = false;
 
+// ---- Isi dropdown klinik saat halaman load ----
+function initLoginForm() {
+  const sel = document.getElementById('klinikSelect');
+  KLINIK_CONFIG.forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k.nama;
+    opt.textContent = k.nama;
+    sel.appendChild(opt);
+  });
+  // Tambah opsi Admin
+  const adminOpt = document.createElement('option');
+  adminOpt.value = '__admin__';
+  adminOpt.textContent = '👤 GA / Admin';
+  sel.appendChild(adminOpt);
+}
+
+// ---- Toggle show/hide PIN ----
+function togglePin() {
+  const input = document.getElementById('pinInput');
+  const btn = document.getElementById('pinToggle');
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+// ---- Login ----
+function doLogin() {
+  const selectedKlinik = document.getElementById('klinikSelect').value;
+  const enteredPin = document.getElementById('pinInput').value.trim();
+  const errorDiv = document.getElementById('loginError');
+
+  errorDiv.style.display = 'none';
+
+  if (!selectedKlinik) {
+    errorDiv.textContent = 'Pilih klinik terlebih dahulu.';
+    errorDiv.style.display = 'block';
+    return;
+  }
+
+  if (!enteredPin) {
+    errorDiv.textContent = 'Masukkan PIN terlebih dahulu.';
+    errorDiv.style.display = 'block';
+    return;
+  }
+
+  // Cek admin
+  if (selectedKlinik === '__admin__') {
+    if (enteredPin === ADMIN_CONFIG.pin) {
+      isAdmin = true;
+      activeKlinik = null;
+      showApp('GA / Admin — Semua Klinik');
+      return;
+    } else {
+      errorDiv.textContent = 'PIN Admin salah. Coba lagi.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+  }
+
+  // Cek klinik
+  const klinik = KLINIK_CONFIG.find(k => k.nama === selectedKlinik);
+  if (klinik && enteredPin === klinik.pin) {
+    isAdmin = false;
+    activeKlinik = klinik.nama;
+    showApp(klinik.nama);
+  } else {
+    errorDiv.textContent = 'PIN salah. Coba lagi.';
+    errorDiv.style.display = 'block';
+    document.getElementById('pinInput').value = '';
+  }
+}
+
+function showApp(badgeLabel) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  document.getElementById('activeBadge').textContent = badgeLabel;
+  loadData();
+}
+
+function doLogout() {
+  allTickets = [];
+  allTimelines = [];
+  activeKlinik = null;
+  isAdmin = false;
+  document.getElementById('pinInput').value = '';
+  document.getElementById('klinikSelect').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('result').innerHTML = '<div class="loading">⏳ Loading data...</div>';
+}
+
+// ---- Enter key on PIN input ----
+document.addEventListener('DOMContentLoaded', () => {
+  initLoginForm();
+  document.getElementById('pinInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') applyFilters();
+  });
+});
+
+// ---- CSV Parser ----
 function parseCSV(csvText) {
   const lines = csvText.trim().split('\n');
   const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-  
   const data = [];
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
     const row = {};
-    headers.forEach((header, index) => {
-      row[header] = values[index] || '';
-    });
+    headers.forEach((header, index) => { row[header] = values[index] || ''; });
     data.push(row);
   }
   return data;
 }
 
+// ---- Load Data ----
 async function loadData() {
-  const errorDiv = document.getElementById('errorMsg');
-  errorDiv.innerHTML = '';
-  
+  document.getElementById('errorMsg').innerHTML = '';
   document.getElementById('result').innerHTML = '<div class="loading">⏳ Loading data...</div>';
-  
+
   try {
-    const ticketsResponse = await fetch(SHEETS_CONFIG.tickets);
-    const ticketsCSV = await ticketsResponse.text();
-    allTickets = parseCSV(ticketsCSV);
-    
-    const timelineResponse = await fetch(SHEETS_CONFIG.timeline);
-    const timelineCSV = await timelineResponse.text();
-    allTimelines = parseCSV(timelineCSV);
-    
-    initializeKlinikFilter();
+    const [ticketsRes, timelineRes] = await Promise.all([
+      fetch(SHEETS_CONFIG.tickets),
+      fetch(SHEETS_CONFIG.timeline)
+    ]);
+    allTickets  = parseCSV(await ticketsRes.text());
+    allTimelines = parseCSV(await timelineRes.text());
     updateStats();
     applyFilters();
-    
   } catch (error) {
-    errorDiv.innerHTML = `
-      <div class="error">
-        <strong>❌ Error loading data:</strong><br>
-        ${error.message}<br><br>
-        Pastikan Google Sheets sudah di-publish dan URL sudah benar.
-      </div>
-    `;
+    document.getElementById('errorMsg').innerHTML = `
+      <div class="error"><strong>❌ Error loading data:</strong><br>${error.message}</div>`;
     document.getElementById('result').innerHTML = '';
   }
 }
 
-function initializeKlinikFilter() {
-  const kliniks = [...new Set(allTickets.map(t => t.klinik))].sort();
-  const klinikSelect = document.getElementById('klinikFilter');
-  
-  klinikSelect.innerHTML = '<option value="">Semua Klinik</option>';
-  
-  kliniks.forEach(klinik => {
-    const option = document.createElement('option');
-    option.value = klinik;
-    option.textContent = klinik;
-    klinikSelect.appendChild(option);
-  });
-}
-
+// ---- Stats ----
 function updateStats() {
-  const total = allTickets.length;
-  const onProgress = allTickets.filter(t => 
-    t.status === 'On Progress' || 
-    t.status === 'Open' || 
-    t.status === 'Diverifikasi GA'
-  ).length;
-  const done = allTickets.filter(t => t.status === 'Closed / Done').length;
-  
-  document.getElementById('totalStat').textContent = total;
-  document.getElementById('progressStat').textContent = onProgress;
-  document.getElementById('doneStat').textContent = done;
+  const tickets = isAdmin ? allTickets : allTickets.filter(t => t.klinik === activeKlinik);
+  document.getElementById('totalStat').textContent    = tickets.length;
+  document.getElementById('progressStat').textContent = tickets.filter(t => ['On Progress','Open','Diverifikasi GA'].includes(t.status)).length;
+  document.getElementById('doneStat').textContent     = tickets.filter(t => t.status === 'Closed / Done').length;
 }
 
+// ---- Render Ticket ----
 function renderTicket(ticket) {
   const st = STATUS_STYLE[ticket.status] || { bg: '#D3D1C7', color: '#444' };
-  
+
   const steps = allTimelines
     .filter(t => t.ticket_id === ticket.ticket_id)
     .sort((a, b) => parseInt(a.step_order) - parseInt(b.step_order))
     .map((s, i) => {
-      const isDone = s.is_done === 'TRUE';
+      const isDone   = s.is_done === 'TRUE';
       const isActive = s.is_active === 'TRUE';
-      const cls = isDone && !isActive ? 'tl-done' : isActive ? 'tl-active' : 'tl-wait';
-      const icon = isDone && !isActive ? '&#10003;' : isActive ? (i + 1) : ' ';
-      
+      const cls  = isDone && !isActive ? 'tl-done' : isActive ? 'tl-active' : 'tl-wait';
+      const icon = isDone && !isActive ? '&#10003;' : isActive ? (i + 1) : (i + 1);
       return `
         <div class="tl-item ${cls}">
           <div class="tl-dot">${icon}</div>
           <div class="tl-line"></div>
           <div class="tl-label">${s.label}</div>
           ${s.sub_label ? `<div class="tl-sub">${s.sub_label}</div>` : ''}
-          ${s.waktu ? `<div class="tl-time">${s.waktu}</div>` : ''}
-        </div>
-      `;
+          ${s.waktu     ? `<div class="tl-time">${s.waktu}</div>`    : ''}
+        </div>`;
     }).join('');
-  
+
+  const metaLine = isAdmin
+    ? `${ticket.klinik} &nbsp;·&nbsp; PIC: ${ticket.pic}`
+    : `PIC: ${ticket.pic}`;
+
   return `
     <div class="card">
       <div class="ticket-header">
@@ -558,7 +683,7 @@ function renderTicket(ticket) {
           <div class="ticket-id">${ticket.ticket_id} &nbsp;·&nbsp; ${ticket.tanggal}</div>
           <div class="ticket-title">${ticket.sub_kategori}</div>
           <div class="kategori-badge">${ticket.kategori}</div>
-          <div class="ticket-meta">${ticket.klinik} &nbsp;·&nbsp; PIC: ${ticket.pic}</div>
+          <div class="ticket-meta">${metaLine}</div>
         </div>
         <div class="status-badge" style="background:${st.bg};color:${st.color}">${ticket.status}</div>
       </div>
@@ -568,54 +693,31 @@ function renderTicket(ticket) {
         <div class="note-box">
           <div class="note-label">Catatan dari GA</div>
           <div class="note-text">${ticket.catatan}</div>
-        </div>
-      ` : ''}
-    </div>
-  `;
+        </div>` : ''}
+    </div>`;
 }
 
+// ---- Apply Filters ----
 function applyFilters() {
-  const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
-  const klinikFilter = document.getElementById('klinikFilter').value;
-  const resultDiv = document.getElementById('result');
-  const countDiv = document.getElementById('resultCount');
-  
-  let filtered = allTickets;
-  
-  if (klinikFilter) {
-    filtered = filtered.filter(t => t.klinik === klinikFilter);
-  }
-  
-  if (searchQuery) {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  let filtered = isAdmin ? allTickets : allTickets.filter(t => t.klinik === activeKlinik);
+
+  if (q) {
     filtered = filtered.filter(t =>
-      t.ticket_id.toLowerCase().includes(searchQuery) ||
-      t.klinik.toLowerCase().includes(searchQuery) ||
-      t.pengaju.toLowerCase().includes(searchQuery) ||
-      t.kategori.toLowerCase().includes(searchQuery) ||
-      t.sub_kategori.toLowerCase().includes(searchQuery)
+      t.ticket_id.toLowerCase().includes(q) ||
+      t.klinik.toLowerCase().includes(q) ||
+      t.pengaju.toLowerCase().includes(q) ||
+      t.kategori.toLowerCase().includes(q) ||
+      t.sub_kategori.toLowerCase().includes(q)
     );
   }
-  
-  countDiv.textContent = `Menampilkan ${filtered.length} dari ${allTickets.length} tiket`;
-  
-  if (filtered.length === 0) {
-    resultDiv.innerHTML = `
-      <div class="empty">
-        Tiket tidak ditemukan.<br>
-        Coba ubah filter atau kata kunci pencarian.
-      </div>
-    `;
-  } else {
-    resultDiv.innerHTML = filtered.map(renderTicket).join('');
-  }
+
+  const total = isAdmin ? allTickets.length : allTickets.filter(t => t.klinik === activeKlinik).length;
+  document.getElementById('resultCount').textContent = `Menampilkan ${filtered.length} dari ${total} tiket`;
+  document.getElementById('result').innerHTML = filtered.length === 0
+    ? '<div class="empty">Tiket tidak ditemukan.<br>Coba ubah kata kunci pencarian.</div>'
+    : filtered.map(renderTicket).join('');
 }
-
-document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') applyFilters();
-});
-
-window.addEventListener('load', loadData);
 </script>
-
 </body>
 </html>
